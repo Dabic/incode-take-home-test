@@ -14,9 +14,6 @@ public class BackendService {
     public static final String NO_RESULTS_FOUND_MSG = "No results found";
     public static final String UPSTREAMS_DOWN_MSG = "Upstreams down";
 
-    private static final String FREE_COMPANY_API = "/free-third-party";
-    private static final String PREMIUM_COMPANY_API = "/premium-third-party";
-
     private final CompanyClient companyClient;
     private final VerificationService verificationService;
 
@@ -34,8 +31,8 @@ public class BackendService {
         var source = queryResultAndSource.getRight();
 
         /*
-         * Query auditing like this one is a side effect and should ideally be decoupled from the core flow.
-         * I kept it here for simplicity.
+         * In a production-grade code, query auditing like this one is a side effect and should ideally be decoupled
+         * from the core flow.
          */
         verificationService.storeVerification(verificationId, query, source, result);
 
@@ -43,21 +40,21 @@ public class BackendService {
     }
 
     /**
-     * In a production-grade setup, I would probably use Spring Retry for this. But since our requirements are not
+     * In a production-grade code, I would probably use Spring Retry for this. But since our requirements are not
      * that complex i.e., there is no retry backoff or a need for circuit breaking, this implementation is enough.
      */
     private Pair<BackendDto, ThirdPartyResultSource> queryCompanySources(String query, UUID verificationId) {
 
-        var freeCompanyResult = companyClient.queryCompanies(FREE_COMPANY_API, query);
-        if (freeCompanyResult.status() == QueryStatus.OK) {
+        var freeCompanyResult = companyClient.queryCompanies(ThirdPartyResultSource.FREE, query);
+        if (QueryStatus.OK.equals(freeCompanyResult.status())) {
             return Pair.of(
                     BackendDto.of(query, verificationId, freeCompanyResult.companies()),
                     ThirdPartyResultSource.FREE
             );
         }
 
-        var premiumCompanyResult = companyClient.queryCompanies(PREMIUM_COMPANY_API, query);
-        if (premiumCompanyResult.status() == QueryStatus.OK) {
+        var premiumCompanyResult = companyClient.queryCompanies(ThirdPartyResultSource.PREMIUM, query);
+        if (QueryStatus.OK.equals(premiumCompanyResult.status())) {
             return Pair.of(
                     BackendDto.of(query, verificationId, premiumCompanyResult.companies()),
                     ThirdPartyResultSource.PREMIUM

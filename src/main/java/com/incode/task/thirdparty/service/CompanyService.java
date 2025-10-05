@@ -13,7 +13,7 @@ import java.util.List;
 public class CompanyService {
 
     /**
-     * In a real production-grade setup, I wouldn’t preload all companies into memory.
+     * In a real production-grade code, I wouldn’t preload all companies into memory.
      * Depending on requirements, I would either use a cache designed for this type of search or query the database
      * directly for each request.
      */

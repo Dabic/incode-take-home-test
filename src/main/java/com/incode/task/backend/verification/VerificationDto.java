@@ -10,7 +10,7 @@ public record VerificationDto(
         String queryText,
         LocalDateTime timestamp,
         ThirdPartyResultSource source,
-        BackendQueryResult result
+        ResultPayload result
 ) {
 
     public VerificationDto(Verification verification) {

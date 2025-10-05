@@ -33,14 +33,14 @@ public class Verification {
 
     @Column(columnDefinition = "jsonb")
     @Type(JsonBinaryType.class)
-    private BackendQueryResult result;
+    private ResultPayload result;
 
     public Verification() {
 
     }
 
     public Verification(UUID verificationId, String queryText, LocalDateTime timestamp, ThirdPartyResultSource source,
-                        BackendQueryResult result) {
+                        ResultPayload result) {
 
         this.verificationId = verificationId;
         this.queryText = queryText;
@@ -89,12 +89,12 @@ public class Verification {
         this.source = source;
     }
 
-    public BackendQueryResult getResult() {
+    public ResultPayload getResult() {
 
         return result;
     }
 
-    public void setResult(BackendQueryResult result) {
+    public void setResult(ResultPayload result) {
 
         this.result = result;
     }

@@ -22,9 +22,13 @@ public class VerificationService {
     @Transactional
     public void storeVerification(UUID id, String queryText, ThirdPartyResultSource source, BackendDto resultDto) {
 
-        BackendQueryResult queryResult = new BackendQueryResult(resultDto.result(), resultDto.otherResults());
+        ResultPayload resultPayload = new ResultPayload(resultDto.result(), resultDto.otherResults());
 
-        verificationRepository.save(new Verification(id, queryText, LocalDateTime.now(), source, queryResult));
+        /*
+         * Using LocalDateTime.now() makes it impossible to test. If I was writing this for production,
+         * I would inject Clock into the component and use LocalDateTime.now(clock) which would make this test-friendly.
+         */
+        verificationRepository.save(new Verification(id, queryText, LocalDateTime.now(), source, resultPayload));
     }
 
     @Transactional(readOnly = true)

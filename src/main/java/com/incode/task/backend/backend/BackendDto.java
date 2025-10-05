@@ -10,6 +10,10 @@ import java.util.UUID;
 public record BackendDto(
         String query,
         UUID verificationId,
+        /*
+         * I know using an Object class is not ideal. I could just create a sealed interface and use it here, or use
+         * the infamous JsonSubTypes. But since this is not a production-grade code, Object gets the job done.
+         */
         @JsonInclude(JsonInclude.Include.NON_NULL) Object result,
         @JsonInclude(JsonInclude.Include.NON_NULL) List<CompanyDto> otherResults,
         @JsonIgnore ThirdPartyResultSource source

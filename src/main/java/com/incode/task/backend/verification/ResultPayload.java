@@ -5,7 +5,7 @@ import com.incode.task.backend.client.CompanyDto;
 
 import java.util.List;
 
-public record BackendQueryResult(
+public record ResultPayload(
         Object result,
         @JsonInclude(JsonInclude.Include.NON_EMPTY) List<CompanyDto> otherResults
 ) {

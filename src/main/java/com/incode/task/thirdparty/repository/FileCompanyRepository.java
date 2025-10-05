@@ -26,7 +26,7 @@ public class FileCompanyRepository implements CompanyRepository {
             return objectMapper.readValue(in, new TypeReference<>() {});
         } catch (IOException e) {
             /*
-             * In production-grade setup, this should be handled more gracefully. However, if the service cannot
+             * In production-grade code, this should be handled more gracefully. However, if the service cannot
              * connect to or load data from its datasource, it often makes sense to fail fast at startup rather
              * than continue in a broken state.
              */

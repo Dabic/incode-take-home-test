@@ -14,7 +14,8 @@ public class ServiceUnavailableSimulator {
     private static final String SERVICE_UNAVAILABLE_MESSAGE = "Simulated service unavailable";
     private static final int MAX_PROBABILITY = 100;
     /**
-     * In production-grade setup, I wouldn't instantiate a class like this (using new) nor would I use {@link Random}.
+     * In production-grade code, I wouldn't instantiate a class like this (using new) nor would I use {@link Random},
+     * since it would ruin the throughput.
      */
     private final Random RNG = new Random();
 
