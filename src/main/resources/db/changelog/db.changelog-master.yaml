@@ -1,0 +1,32 @@
+databaseChangeLog:
+  - changeSet:
+      author: vladimir.dabic
+      id: 1.0.0
+      changes:
+        - createTable:
+            tableName: verification
+            columns:
+              - column:
+                  name: verification_id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_verification_verification_id
+              - column:
+                  name: query_text
+                  type: TEXT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: "timestamp"
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: source
+                  type: TEXT
+              - column:
+                  name: result
+                  type: jsonb
+                  constraints:
+                    nullable: false
