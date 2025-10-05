@@ -25,7 +25,7 @@ public class ThirdPartyPremiumIntegrationTest extends BaseIntegrationTest {
     };
 
     @Test
-    void shouldReturnEmptyCompaniesWhenNoMatchingCompanies() {
+    void noMatchingCompanies_shouldReturnEmptyCompanies() {
 
         var uri = UriComponentsBuilder.fromUriString(PREMIUM_COMPANY_API)
                 .queryParam("query", UUID.randomUUID())
@@ -42,7 +42,7 @@ public class ThirdPartyPremiumIntegrationTest extends BaseIntegrationTest {
     }
 
     @Test
-    void shouldReturnCompaniesWhenMatchedCompanies() {
+    void matchedCompanies_shouldReturnCompanies() {
 
         var uri = UriComponentsBuilder.fromUriString(PREMIUM_COMPANY_API)
                 .queryParam("query", QUERY)

@@ -25,7 +25,7 @@ public class ThirdPartyFreeIntegrationTest extends BaseIntegrationTest {
     };
 
     @Test
-    void shouldReturnEmptyCompaniesWhenNoMatchingCompanies() {
+    void noMatchingCompanies_shouldReturnEmptyCompanies() {
 
         var uri = UriComponentsBuilder.fromUriString(FREE_COMPANY_API)
                 .queryParam("query", UUID.randomUUID())
@@ -42,7 +42,7 @@ public class ThirdPartyFreeIntegrationTest extends BaseIntegrationTest {
     }
 
     @Test
-    void shouldReturnCompaniesWhenMatchedCompanies() {
+    void matchedCompanies_shouldReturnCompanies() {
 
         var uri = UriComponentsBuilder.fromUriString(FREE_COMPANY_API)
                 .queryParam("query", QUERY)
@@ -61,7 +61,7 @@ public class ThirdPartyFreeIntegrationTest extends BaseIntegrationTest {
                 .allMatch(cin -> cin.contains(QUERY));
 
         // just to be sure all other fields are mapped correctly
-        assertThat(response.getBody().get(0))
+        assertThat(response.getBody().getFirst())
                 .isEqualTo(standardFreeCompanyDto());
     }
 

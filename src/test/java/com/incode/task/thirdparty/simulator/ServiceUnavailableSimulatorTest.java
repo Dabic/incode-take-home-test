@@ -16,6 +16,8 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class ServiceUnavailableSimulatorTest {
 
+    private static final int MAX_PROBABILITY = 100;
+
     @Mock
     private Random rng;
 
@@ -27,7 +29,7 @@ class ServiceUnavailableSimulatorTest {
 
         ReflectionTestUtils.setField(serviceUnavailableSimulator, "RNG", rng);
 
-        when(rng.nextInt(100))
+        when(rng.nextInt(MAX_PROBABILITY))
                 .thenReturn(50);
 
         assertThrows(ResponseStatusException.class, () -> serviceUnavailableSimulator.maybeSimulateOutage(51));
@@ -38,7 +40,7 @@ class ServiceUnavailableSimulatorTest {
 
         ReflectionTestUtils.setField(serviceUnavailableSimulator, "RNG", rng);
 
-        when(rng.nextInt(100))
+        when(rng.nextInt(MAX_PROBABILITY))
                 .thenReturn(50);
 
         serviceUnavailableSimulator.maybeSimulateOutage(50);
